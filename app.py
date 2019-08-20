@@ -4,18 +4,16 @@ import pymongo
 
 app = Flask(__name__)
 
-# Creating the connection to Mongo
-app.config["MONGO_DBNAME"] = "online_cookbook"
-app.config["MONGO_URI"] = os.getenv("MONGO_URI")
-
-
-# Create the connection
+# Create the connection to MongoDB
 conn = pymongo.MongoClient(os.getenv("MONGO_URI"))
 
 
 @app.route("/")
-def hello():
-    return "hello"
+def index():
+    
+    recipes = conn["online_cookbook"]["recipes"].find({})
+    
+    return render_template("index.html", recipes=recipes)
 
 
 
