@@ -75,5 +75,8 @@ The photos used in this site were obtained from ...
 Acknowledgements
 I received inspiration for this project from X
 
+    #### Photos from Pexels
+    #### logo from freelogodesign
+
     #### Source of knifes: https://www.macknife.com/ 
     #### Layout of Online Recipes: https://www.allrecipes.com/, https://www.delish.com/, https://www.blueapron.com/pages/sample-recipes

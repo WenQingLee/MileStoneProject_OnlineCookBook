@@ -11,9 +11,11 @@ conn = pymongo.MongoClient(os.getenv("MONGO_URI"))
 @app.route("/")
 def index():
     
+    recipe_name = conn["online_cookbook"]["recipes"]["name"]
+
     recipes = conn["online_cookbook"]["recipes"].find({})
     
-    return render_template("index.html", recipes=recipes)
+    return render_template("index.html", recipes=recipes, recipe_name=recipe_name)
 
 
 
