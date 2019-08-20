@@ -49,47 +49,75 @@
 
 
         <!--Card for meat category-->
-        <div class="col s4 card">
+        <div class="col xl4 card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ url_for('static', filename = 'images/category/meat.jpg') }}">
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4">Meat Recipes<i class="material-icons right">more_vert</i></span>
                 <p><a href="#">This is a link</a></p>
             </div>
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <span class="card-title grey-text text-darken-4">Meat Recipes<i class="material-icons right">close</i></span>
+
+                <ol>
+                    {% for meat in type_meat %}
+
+                    <li>{{ meat["name"].capitalize() }}</li>
+
+                    {% endfor %}
+                </ol>
+
             </div>
         </div>
 
         <!--Card for vegetable category-->
-        <div class="col s4 card">
+        <div class="col xl4 card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ url_for('static', filename = 'images/category/vegetable.jpg') }}">
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4">Vegetable Recipes<i class="material-icons right">more_vert</i></span>
                 <p><a href="#">This is a link</a></p>
             </div>
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <span class="card-title grey-text text-darken-4">Vegetable Recipes<i class="material-icons right">close</i></span>
+                
+                <ol>
+                    
+                    {% for vegetable in type_vegetable %}
+
+                    <li>{{ vegetable["name"].capitalize() }}</li>
+
+                    {% endfor %}
+                    
+                </ol>
+                
             </div>
         </div>
 
         <!--Card for dessert category-->
-        <div class="col s4 card">
+        <div class="col xl4 card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ url_for('static', filename = 'images/category/dessert.jpg') }}">
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4">Dessert Recipes<i class="material-icons right">more_vert</i></span>
                 <p><a href="#">This is a link</a></p>
             </div>
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <span class="card-title grey-text text-darken-4">Dessert Recipes<i class="material-icons right">close</i></span>
+                
+                <ol>
+                    
+                    {% for dessert in type_dessert %}
+
+                    <li>{{ dessert["name"].capitalize() }}</li>
+
+                    {% endfor %}
+                    
+                </ol>
+                
             </div>
         </div>
     </div>
@@ -97,7 +125,9 @@
 
     {% for recipe in recipes %}
 
-    <p>{{recipe}}</p>
+    <p>{{ recipe }}</p>
+    <br />
+    <p>{{ recipe["name"] }}</p>
 
     {% endfor %}
 
