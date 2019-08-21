@@ -9,4 +9,38 @@
 
 <h1>List of recipes</h1>
 
+<h3>Meat Recipes</h3>
+
+<ol>
+    {% for meat in type_meat %}
+
+    <li><a href="{{ url_for('recipe_details', recipe_id=meat['_id']) }}">{{ meat["name"].capitalize() }}</a></li>
+
+    {% endfor %}
+</ol>
+
+<h3>Vegetable Recipes</h3>
+
+<ol>
+
+    {% for vegetable in type_vegetable %}
+    
+    <li><a href="{{ url_for('recipe_details', recipe_id=vegetable['_id']) }}">{{ vegetable["name"].capitalize() }}</a></li>
+
+    {% endfor %}
+
+</ol>
+
+<h3>Dessert Recipes</h3>
+
+<ol>
+
+    {% for dessert in type_dessert %}
+    
+    <li><a href="{{ url_for('recipe_details', recipe_id=dessert['_id']) }}">{{ dessert["name"].capitalize() }}</a></li>
+
+    {% endfor %}
+
+</ol>
+
 {% endblock %}
