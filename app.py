@@ -22,6 +22,9 @@ def index():
     
     return render_template("index.html", recipes=recipes, type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
 
+@app.route("/recipe-list")
+def recipe_list():
+    return render_template("recipes-list.html")
 
 
 if __name__ == '__main__':

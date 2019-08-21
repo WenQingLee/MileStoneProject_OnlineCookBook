@@ -28,9 +28,9 @@
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo"><img src="{{ url_for('static', filename = 'images/logo/logo.png') }}"></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="#submit-recipe">Submit a recipe</a></li>
-                        <li><a href="#search-recipe">Search our recipes</a></li>
-                        <li><a href="collapsible.html">JavaScript</a></li>
+                        <li><a href="sass.html">Submit a recipe</a></li>
+                        <li><a href="badges.html">Components</a></li>
+                        <li><a href="collapsible.html">Search our recipes</a></li>
                     </ul>
                 </div>
             </nav>
@@ -43,21 +43,23 @@
 
         <!--Submit Recipe Display-->
 
-        <div class="col s12 m7">
-            <h2 class="header center-align" id="submit-recipe">Submit a recipe</h2>
+        <div class="col s12 m7" id="submit-recipe">
             <div class="card horizontal card-panel hoverable">
-                <div class="card-image">
+                <div class="card-image hide-on-med-and-down">
                     <img src="{{ url_for('static', filename = 'images/homepage/submit-recipe.jpg') }}">
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
-                        <h4>Featured Recipe: {{recipe_name}}</h4>
-                        <h4>Summary: </h4>
-                        <h4>Rating: </h4>
-                        <p>I am a very simple card. I am good at containing small bits of information.</p>
+                        <div class="center-align">
+                            <img src="{{ url_for('static', filename = 'images/logo/logo.png') }}">
+                        </div>
+                        <h4>About Cookit-Mons</h4>
+                        <p>Cookit-Mons was created as a project by an aspiring full-stack developer in his dream to eat something besides instant ramen for the rest of his life.</p>
+                        <br />
+                        <p>Seeking the aid of chefs and home cooks everywhere, we beseech your help to combat our mutual nemesis, instant ramen</p>
                     </div>
                     <div class="card-action">
-                        <a href="#">Submit a recipe</a>
+                        <a href="#">Submit a recipe!</a>
                     </div>
                 </div>
             </div>
@@ -66,12 +68,11 @@
 
         <!--Recipe search title-->
         <div class="header center-align" id="search-recipe">
-            <h1>Search our recipes</h1>
+            <h1 class="pulse">Recipes of Cookit-Mon</h1>
         </div>
 
         <!--Recipe Card Categories-->
         <div class="row">
-
 
             <!--Card for meat category-->
             <div class="col xl4 card card-panel hoverable">
@@ -183,9 +184,15 @@
             </div>
     </footer>
 
+    <!--JQuery-->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.4.1.js') }}"></script>
+
     <!--Materialize JavaScript at end of body for optimized loading-->
     <script src="{{ url_for('static', filename = 'js/materialize.min.js') }}"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
+
+    <!--Website Javascript-->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/script.js') }}"></script>
 
 </body>
 
