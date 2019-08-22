@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cookit-Mons</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <!--Import Materialize CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/materialize.min.css') }}">
@@ -34,6 +34,8 @@
                 </div>
             </nav>
         </div>
+        
+        {% block header %}{% endblock %}
 
     </header>
 
@@ -56,13 +58,13 @@
                 </div>
                 <div class="col l4 offset-l2 s12 center-align">
                     <div class="sm-icon" id="social-media">
-                        <a class="facebook1" href="https://www.facebook.com/ConstHub" target="_blank" title="Facebook" rel="nofollow">
+                        <a class="facebook1" href="https://www.facebook.com/" target="_blank" title="Facebook" rel="nofollow">
                             <div class="facebook1"></div>
                         </a>
-                        <a class="twitter1" href="https://twitter.com/ConstHub" target="_blank" title="Twitter" rel="nofollow">
+                        <a class="twitter1" href="https://twitter.com/" target="_blank" title="Twitter" rel="nofollow">
                             <div class="twitter1"></div>
                         </a>
-                        <a class="linkdin1" href="https://www.linkedin.com/in/ConstHub" target="_blank" title="Linkedin" rel="nofollow">
+                        <a class="linkdin1" href="https://www.linkedin.com/in/" target="_blank" title="Linkedin" rel="nofollow">
                             <div class="linkdin1"></div>
                         </a>
                     </div>

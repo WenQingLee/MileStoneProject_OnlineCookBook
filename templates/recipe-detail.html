@@ -1,4 +1,25 @@
-{% extends "base.html" %} {% block title %}Recipe Detail{% endblock %} {% block content %}
+{% extends "base.html" %} 
+
+<!--Page Title-->
+{% block title %}Recipe Detail: {{ recipe_detail['name'].capitalize() }}{% endblock %} 
+
+<!--Breadcrumb Navigation-->
+{% block header %}
+
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
+        <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>
+        <a href="#!" class="breadcrumb">{{ recipe_detail['name'].capitalize() }}</a>
+      </div>
+    </div>
+  </nav>
+
+{% endblock %}
+
+
+{% block content %}
 
 <!--Recipe image-->
 <div class="recipe-image">
@@ -22,7 +43,7 @@
 
     <div class="col s12 l6">
         <h5>Ingredients</h5>
-
+    
         <ol>
             {% for ingredient in show_ingredients %}
 

@@ -4,6 +4,21 @@
 {% block title %}List of recipes{% endblock %}
 
 
+<!--Breadcrumb Navigation-->
+{% block header %}
+
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
+        <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>
+      </div>
+    </div>
+  </nav>
+
+{% endblock %}
+
+
 <!--Page content-->
 {% block content %}
 

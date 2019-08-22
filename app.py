@@ -8,47 +8,46 @@ app = Flask(__name__)
 # Create the connection to MongoDB
 conn = pymongo.MongoClient(os.getenv("MONGO_URI"))
 
+# Define the Database used for easy reference and future updates
+RECIPE_DATABASE = 'online_cookbook'
 
 @app.route("/")
 def index():
     
-    recipes = conn["online_cookbook"]["recipes"].find({})
+    recipes = conn[RECIPE_DATABASE]["recipes"].find({})
     
-    type_meat = conn["online_cookbook"]["recipes"].find({"type":"meat"})
+    type_meat = conn[RECIPE_DATABASE]["recipes"].find({"type":"meat"})
     
-    type_vegetable = conn["online_cookbook"]["recipes"].find({"type":"vegetable"})
+    type_vegetable = conn[RECIPE_DATABASE]["recipes"].find({"type":"vegetable"})
     
-    type_dessert = conn["online_cookbook"]["recipes"].find({"type":"dessert"})
+    type_dessert = conn[RECIPE_DATABASE]["recipes"].find({"type":"dessert"})
     
     return render_template("index.html", recipes=recipes, type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
 
 @app.route("/recipe-list")
 def recipe_list():
     
-    type_meat = conn["online_cookbook"]["recipes"].find({"type":"meat"})
+    type_meat = conn[RECIPE_DATABASE]["recipes"].find({"type":"meat"})
     
-    type_vegetable = conn["online_cookbook"]["recipes"].find({"type":"vegetable"})
+    type_vegetable = conn[RECIPE_DATABASE]["recipes"].find({"type":"vegetable"})
     
-    type_dessert = conn["online_cookbook"]["recipes"].find({"type":"dessert"})
+    type_dessert = conn[RECIPE_DATABASE]["recipes"].find({"type":"dessert"})
     
     return render_template("recipes-list.html", type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
 
 @app.route("/recipe-details/<recipe_id>")
 def recipe_details(recipe_id):
     
-    recipe_detail = conn["online_cookbook"]["recipes"].find_one({
+    recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
         "_id":ObjectId(recipe_id)
     })
     
-    # Obtain the objectid for the "ingredients" referenced document
-    ingredients_ref = recipe_detail["ingredients"]
-    
-    # Use the objectid to find the ingredients list
-    ingredients_list = conn["online_cookbook"]["ingredients"].find_one({
-        "_id":ObjectId(ingredients_ref)
+    # Use the objectid to find the "ingredients" to find the prep_steps in the referenced document
+    ingredients_list = conn[RECIPE_DATABASE]["ingredients"].find_one({
+        "_id":ObjectId(recipe_detail["ingredients"])
     })
     
-    # Declare the variables to be used in the while loop to obtain the ingredients
+    # Declare the variables to be used in the while loop to contain the ingredients n an array
     i=1
     show_ingredients = []
     
@@ -57,15 +56,12 @@ def recipe_details(recipe_id):
         show_ingredients.append(ingredients_list[str(i)])
         i = i+1
 
-    # Obtain the objectid for the "prep_steps" referenced document
-    prep_steps_ref = recipe_detail["prep_steps"]
-    
-    # Use the objectid to find the prep_steps
-    prep_steps_list = conn["online_cookbook"]["prep_steps"].find_one({
-        "_id":ObjectId(prep_steps_ref)
+    # Use the objectid for the "prep_steps" to find the prep_steps in the referenced document 
+    prep_steps_list = conn[RECIPE_DATABASE]["prep_steps"].find_one({
+        "_id":ObjectId(recipe_detail["prep_steps"])
     })
     
-    # Declare the variables to be used in the while loop to obtain the prep_steps
+    # Declare the variables to be used in the while loop to contain the prep_steps in an array
     j=1
     show_prep_steps = []
     
