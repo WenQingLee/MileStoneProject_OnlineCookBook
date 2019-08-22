@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 import pymongo
 from bson.objectid import ObjectId
@@ -11,6 +11,7 @@ conn = pymongo.MongoClient(os.getenv("MONGO_URI"))
 # Define the Database used for easy reference and future updates
 RECIPE_DATABASE = 'online_cookbook'
 
+# Route to homepage
 @app.route("/")
 def index():
     
@@ -24,6 +25,7 @@ def index():
     
     return render_template("index.html", recipes=recipes, type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
 
+# Route to recipes list
 @app.route("/recipe-list")
 def recipe_list():
     
@@ -35,6 +37,7 @@ def recipe_list():
     
     return render_template("recipes-list.html", type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
 
+# Route to recipe details
 @app.route("/recipe-details/<recipe_id>")
 def recipe_details(recipe_id):
     
@@ -71,6 +74,34 @@ def recipe_details(recipe_id):
         j = j+1
     
     return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=show_ingredients, show_prep_steps=show_prep_steps)
+
+# Route to form to submit a recipe
+@app.route("/submit-recipe")
+def submit_recipe():
+    return render_template("submit-recipe.html")
+    
+# Route to process the form
+@app.route("/submit-recipe", methods=["POST"])
+def process_submit_recipe():
+    
+    name_input = request.form.get("recipe-name")
+    nutrition_facts_input = request.form.get("nutrition-facts")
+    cooking_time_input = request.form.get("cooking-time")
+    type_input = request.form.get("type")
+    
+    ingredients_input=request.form.getlist("ingredientInput")
+    prep_input=request.form.getlist("prepInput")
+    
+    print(name_input)
+    print(nutrition_facts_input)
+    print(cooking_time_input)
+    print(type_input)
+    print(ingredients_input)
+    print(prep_input)
+    
+    return "This is working"
+
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

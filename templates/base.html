@@ -28,7 +28,7 @@
                 <div class="nav-wrapper">
                     <a href="{{ url_for('index') }}" class="brand-logo"><img src="{{ url_for('static', filename = 'images/logo/logo.png') }}"></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="sass.html">Submit a recipe</a></li>
+                        <li><a href="{{ url_for('submit_recipe') }}">Submit a recipe</a></li>
                         <li><a href="{{ url_for('recipe_list') }}">Search our recipes</a></li>
                     </ul>
                 </div>
