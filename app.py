@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, redirect, url_for
 import os
 import pymongo
 from bson.objectid import ObjectId
@@ -45,35 +45,7 @@ def recipe_details(recipe_id):
         "_id":ObjectId(recipe_id)
     })
     
-    # Use the objectid to find the "ingredients" to find the prep_steps in the referenced document
-    ingredients_list = conn[RECIPE_DATABASE]["ingredients"].find_one({
-        "_id":ObjectId(recipe_detail["ingredients"])
-    })
-    
-    # Declare the variables to be used in the while loop to contain the ingredients n an array
-    i=1
-    show_ingredients = []
-    
-    # While loop to append the ingredients into a new array called show_ingredients
-    while i < len(ingredients_list):
-        show_ingredients.append(ingredients_list[str(i)])
-        i = i+1
-
-    # Use the objectid for the "prep_steps" to find the prep_steps in the referenced document 
-    prep_steps_list = conn[RECIPE_DATABASE]["prep_steps"].find_one({
-        "_id":ObjectId(recipe_detail["prep_steps"])
-    })
-    
-    # Declare the variables to be used in the while loop to contain the prep_steps in an array
-    j=1
-    show_prep_steps = []
-    
-    # While loop to append the steps into a new array called show_prep_steps
-    while j < len(prep_steps_list):
-        show_prep_steps.append(prep_steps_list[str(j)])
-        j = j+1
-    
-    return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=show_ingredients, show_prep_steps=show_prep_steps)
+    return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=recipe_detail["ingredients"], show_prep_steps=recipe_detail["prep_steps"])
 
 # Route to form to submit a recipe
 @app.route("/submit-recipe")
@@ -84,6 +56,7 @@ def submit_recipe():
 @app.route("/submit-recipe", methods=["POST"])
 def process_submit_recipe():
     
+    # Getting the inputs from the form submitted
     name_input = request.form.get("recipe-name")
     nutrition_facts_input = request.form.get("nutrition-facts")
     cooking_time_input = request.form.get("cooking-time")
@@ -92,40 +65,25 @@ def process_submit_recipe():
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
     
-    print(name_input)
-    print(nutrition_facts_input)
-    print(cooking_time_input)
-    print(type_input)
-    print(ingredients_input)
-    print(prep_input)
-    
-    ingredient_key=1
-    
-    for ingredients in ingredients_input:
-        
-        ingredient_dict = {
-            str(ingredient_key):ingredients
-        }
-        
-        _id = conn[RECIPE_DATABASE]["ingredients"].insert({
-            str(ingredient_key):ingredients
+    # Insert the recipe into a new document
+    conn[RECIPE_DATABASE]["recipes"].insert({
+            "name":name_input,
+            "nutrition_facts":nutrition_facts_input,
+            "cooking_time":cooking_time_input,
+            "type":type_input,
+            "ingredients":ingredients_input,
+            "prep_steps":prep_input
         })
         
-        ingredient_key+=1
-        
-        
-        print(ingredient_dict)
-        print(_id)
+    flash("You have created the new recipe: " + name_input)
     
-        
-        
-        
-    
-    return "This is working"
+    return redirect(url_for("recipe_list"))
 
 
 
 if __name__ == '__main__':
+    app.secret_key = os.environ.get('secret_app_key')
+    app.config['SESSION_TYPE'] = os.environ.get('session_key')
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
