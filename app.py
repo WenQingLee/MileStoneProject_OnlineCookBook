@@ -99,6 +99,28 @@ def process_submit_recipe():
     print(ingredients_input)
     print(prep_input)
     
+    ingredient_key=1
+    
+    for ingredients in ingredients_input:
+        
+        ingredient_dict = {
+            str(ingredient_key):ingredients
+        }
+        
+        _id = conn[RECIPE_DATABASE]["ingredients"].insert({
+            str(ingredient_key):ingredients
+        })
+        
+        ingredient_key+=1
+        
+        
+        print(ingredient_dict)
+        print(_id)
+    
+        
+        
+        
+    
     return "This is working"
 
 

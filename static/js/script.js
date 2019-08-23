@@ -3,6 +3,7 @@ var i = 0;
 // Global variable to number the preparations input
 var j = 0;
 
+// To initialise the select element in submit-recipe.html
 $(document).ready(function() {
   $('select').formSelect();
 });
@@ -10,7 +11,7 @@ $(document).ready(function() {
 // To add an input field for ingredients when the add button is clicked
 $("#add-ingredient").on("click", function() {
   i++;
-  $("#ingredients-input").append('<div class="input-field col s12"> Ingredient ' + i + '<input placeholder="Ingredient" name="ingredientInput" type="text" class="validate"></div>')
+  $("#ingredients-input").append('<div class="input-field col s12"> Ingredient ' + i + '<input placeholder="Ingredient" name="ingredientInput" type="text" class="validate" required></div>')
 });
 
 // To remove an input field for ingredients when the remove button is clicked
@@ -23,7 +24,7 @@ $("#remove-ingredient").on("click", function() {
 // To add an input field for preparations when the add button is clicked
 $("#add-prep").on("click", function() {
   j++;
-  $("#preparations-input").append('<div class="input-field col s12"> Step ' + j + '<input placeholder="Preparation Step" name="prepInput" type="text" class="validate"></div>')
+  $("#preparations-input").append('<div class="input-field col s12"> Step ' + j + '<input placeholder="Preparation Step" name="prepInput" type="text" class="validate" required></div>')
 });
 
 
