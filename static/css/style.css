@@ -1,6 +1,17 @@
+/*Specify Roboto Font*/
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
 /*Resize and reposition the logo to fit the navigation bar*/
-.brand-logo > img {
+.brand-logo {
     height:64px;
+}
+
+/*Resize the carousel*/
+.carousel{
+    max-height:200px;
+    margin-top: 20px;
 }
 
 

@@ -1,3 +1,15 @@
+// To initialise the navbar
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+
+// To initisalise the carousel elements
+ $(document).ready(function(){
+    $('.carousel').carousel();
+  });
+
+
 // To initialise the select element in submit-recipe.html
 $(document).ready(function() {
   $('select').formSelect();

@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
 
+    <!--Roboto Font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
     <!--Import Materialize CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/materialize.min.css') }}">
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
@@ -22,19 +25,24 @@
 <body>
 
     <header>
+
         <!--Navbar-->
-        <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="{{ url_for('index') }}" class="brand-logo"><img src="{{ url_for('static', filename = 'images/logo/logo.png') }}"></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="{{ url_for('submit_recipe') }}">Submit a recipe</a></li>
-                        <li><a href="{{ url_for('recipe_list') }}">Search our recipes</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        
+        <nav>
+            <div class="nav-wrapper">
+                <a href="{{ url_for('index') }}"><img class="brand-logo" src="{{ url_for('static', filename = 'images/logo/logo.png') }}"></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ url_for('submit_recipe') }}">Submit a recipe</a></li>
+                    <li><a href="{{ url_for('recipe_list') }}">Search our recipes</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="{{ url_for('submit_recipe') }}">Submit a recipe</a></li>
+            <li><a href="{{ url_for('recipe_list') }}">Search our recipes</a></li>
+        </ul>
+
         {% block header %}{% endblock %}
 
     </header>
@@ -42,22 +50,50 @@
     <main>
 
 
-   {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
     </main>
 
 
 
 
+    <!--<footer class="page-footer">-->
+
+    <!--    <div class="container">-->
+    <!--        <div class="row valign-wrapper">-->
+
+    <!--            <div class="col s12 l6 valign-wrapper center-align">-->
+    <!--                <img class="brand-logo" src="{{ url_for('static', filename = 'images/logo/logo.png') }}">-->
+    <!--                <p>Cookit-Mons &#174; 2019</p>-->
+    <!--            </div>-->
+
+    <!--            <div class="col s12 l6">-->
+    <!--                <div class="sm-icon center-align" id="social-media">-->
+    <!--                    <a class="facebook1" href="https://www.facebook.com/" target="_blank" title="Facebook" rel="nofollow">-->
+    <!--                        <div class="facebook1"></div>-->
+    <!--                    </a>-->
+    <!--                    <a class="twitter1" href="https://twitter.com/" target="_blank" title="Twitter" rel="nofollow">-->
+    <!--                        <div class="twitter1"></div>-->
+    <!--                    </a>-->
+    <!--                    <a class="linkdin1" href="https://www.linkedin.com/in/" target="_blank" title="Linkedin" rel="nofollow">-->
+    <!--                        <div class="linkdin1"></div>-->
+    <!--                    </a>-->
+    <!--                </div>-->
+    <!--            </div>-->
+
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <!--</footer>-->
+
+
     <footer class="page-footer">
+
+
         <div class="container">
-            <div class="row valign-wrapper">
-                <div class="col s12 l6  valign-wrapper">
-                    <img src="{{ url_for('static', filename = 'images/logo/logo.png') }}" id="footer-logo">
-                    <p>Cookit-Mons &#174; 2019</p>
-                </div>
-                <div class="col s12 l6 center-align">
-                    <div class="sm-icon" id="social-media">
+            <div class="row ">
+                <div class="col s12">
+                    <div class="sm-icon center-align" id="social-media">
                         <a class="facebook1" href="https://www.facebook.com/" target="_blank" title="Facebook" rel="nofollow">
                             <div class="facebook1"></div>
                         </a>
@@ -70,7 +106,21 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+
+
+        <div class="footer-copyright">
+            <div class="container valign-wrapper">
+                <div class="row center-align valign-wrapper">
+
+                <img class="brand-logo" src="{{ url_for('static', filename = 'images/logo/logo.png') }}"> Cookit-Mons &#174; 2019
+                </div>
+            </div>
+        </div>
     </footer>
+
+
 
     <!--JQuery-->
     <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.4.1.js') }}"></script>
