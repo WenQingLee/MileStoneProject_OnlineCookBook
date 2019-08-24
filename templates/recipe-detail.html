@@ -15,6 +15,16 @@
       </div>
     </div>
   </nav>
+  
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 
 {% endblock %}
 
@@ -70,6 +80,9 @@
 
 </div>
 
+<!--Div wrapper for update and delete buttons-->
+<div class="row">
+    
 <!--Update button-->
         <div class="col l6 center-align" id="update-button">
             
@@ -78,5 +91,17 @@
     <i class="material-icons right">edit</i>
   </button>
   </div>
+  
+  
+  <!--Delete button-->
+  <div class="col l6 center-align" id="update-button">
+            
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+            <a href="{{ url_for( 'update_recipe', recipe_id=recipe_detail['_id'] ) }}">Delete Recipe</a>
+    <i class="material-icons right">edit</i>
+  </button>
+  </div>
+
+</div>
 
 {% endblock %}

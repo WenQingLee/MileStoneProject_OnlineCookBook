@@ -61,7 +61,6 @@ def process_submit_recipe():
     nutrition_facts_input = request.form.get("nutrition-facts")
     cooking_time_input = request.form.get("cooking-time")
     type_input = request.form.get("type")
-    
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
     
@@ -75,6 +74,7 @@ def process_submit_recipe():
             "prep_steps":prep_input
         })
         
+    # Setting the flash message    
     flash("You have created the new recipe: " + name_input)
     
     return redirect(url_for("recipe_list"))
@@ -100,17 +100,52 @@ def update_recipe(recipe_id):
     else: 
         dessert_selected = "selected"
     
-    print(recipe_detail["ingredients"])
-    
+    # To obtain the numbering for ingredients
     i=0
     ingredient_numbering=[]
     while i<len(recipe_detail["ingredients"]):
         i+=1
         ingredient_numbering.append(i)
-        print (ingredient_numbering)
         
+    # To obtain the numbering for preparation steps
+    j=0
+    prep_steps_numbering=[]
+    while j<len(recipe_detail["prep_steps"]):
+        j+=1
+        prep_steps_numbering.append(j)
     
-    return render_template("update-recipe.html", recipe_detail=recipe_detail, meat_selected=meat_selected, vegetable_selected=vegetable_selected, dessert_selected=dessert_selected, show_ingredients=zip( ingredient_numbering, recipe_detail["ingredients"] ) )
+    return render_template("update-recipe.html", recipe_detail=recipe_detail, meat_selected=meat_selected, vegetable_selected=vegetable_selected, dessert_selected=dessert_selected, show_ingredients=zip( ingredient_numbering, recipe_detail["ingredients"] ), show_prep_steps=zip( prep_steps_numbering, recipe_detail["prep_steps"] ) )
+
+# Route to process the form to update an existing recipe
+@app.route("/update-recipe/<recipe_id>", methods=["POST"])
+def process_update_recipe(recipe_id):
+    
+    # Get the form inputs
+    name_input = request.form.get("recipe-name")
+    nutrition_facts_input = request.form.get("nutrition-facts")
+    cooking_time_input = request.form.get("cooking-time")
+    type_input = request.form.get("type")
+    ingredients_input=request.form.getlist("ingredientInput")
+    prep_input=request.form.getlist("prepInput")
+    
+    # Using Mongo to update
+    conn[RECIPE_DATABASE]["recipes"].update({
+        "_id":ObjectId(recipe_id)
+    }, {
+        "$set": {
+            "name":name_input,
+            "nutrition_facts":nutrition_facts_input,
+            "cooking_time":cooking_time_input,
+            "type":type_input,
+            "ingredients":ingredients_input,
+            "prep_steps":prep_input
+        }
+    })
+    
+    # Set the flash message
+    flash("You have updated recipe: " + name_input)
+    
+    return redirect(url_for("recipe_details", recipe_id=recipe_id))
 
 
 if __name__ == '__main__':

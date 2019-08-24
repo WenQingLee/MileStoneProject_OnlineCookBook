@@ -12,7 +12,7 @@
             <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
             <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>
             <a href="{{ url_for('recipe_details', recipe_id=recipe_detail["_id"]) }}" class="breadcrumb">{{ recipe_detail['name'].capitalize() }}</a>
-            <a href="#!" class="breadcrumb">Update the recipe</a>
+            <a href="#!" class="breadcrumb">Update recipe</a>
         </div>
     </div>
 </nav>
@@ -66,9 +66,6 @@
                     {% endfor %}
                 </div>
                 <div class="row center-align">
-                    
-                    
-                    
                     <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="add-ingredient"><i class="material-icons">add</i></a> Add an ingredient</div>
                     <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-ingredient"><i class="material-icons">clear</i></a> Remove an ingredient</div>
                 </div>
@@ -78,6 +75,11 @@
                 <div id="preparations-input">
                     <h5>Preparation Steps</h5>
                     <hr />
+                    {% for prep_steps_numbering, prep_steps in show_prep_steps %}
+                    
+                    <div class="input-field col s12"> Step {{ prep_steps_numbering }} <input placeholder="Preparation Step" value="{{ prep_steps.capitalize() }}" name="prepInput" type="text" class="validate" required></div>
+        
+                    {% endfor %}
                 </div>
                 <div class="row center-align">
                     <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="add-prep"><i class="material-icons">add</i></a> Add a step</div>
@@ -87,22 +89,9 @@
 
         </div>
 
-
-        <!--File upload-->
-        <div class="file-field input-field col l6">
-            <div class="btn">
-                <span>Upload image</span>
-                <input type="file">
-            </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-            </div>
-        </div>
-
-
         <!--Submit Button-->
-        <div class="col l6 center-align">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <div class="col s12 center-align">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Update
     <i class="material-icons right">send</i>
   </button>
   </div>
