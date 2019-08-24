@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+<!--Page Title-->
+{% block title %}Update the recipe: {{ recipe_name.capitalize() }}{% endblock %}
+
+<!--Breadcrumb Navigation-->
+{% block header %}
+
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
+            <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>
+            <a href="{{ url_for('recipe_details', recipe_id=recipe_id) }}" class="breadcrumb">{{ recipe_name.capitalize() }}</a>
+            <a href="#!" class="breadcrumb">Delete {{ recipe_name.capitalize() }}</a>
+        </div>
+    </div>
+</nav>
+
+{% endblock %} 
+
+
+{% block content %}
+
+<form action='{{url_for("delete_recipe", recipe_id=recipe_id) }}'>
+               Are you sure you want to delete the recipe: {{ recipe_name }} ?
+               <div>
+                   <input type='submit' class='btn btn-primary' value='Yes'>
+                   <a href='{{ url_for('recipe_details', recipe_id=recipe_id) }}' class='btn btn-primary'>No</a>
+               </div>
+           </form>
+
+
+{% endblock %}

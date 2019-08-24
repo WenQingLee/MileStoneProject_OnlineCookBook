@@ -146,6 +146,32 @@ def process_update_recipe(recipe_id):
     flash("You have updated recipe: " + name_input)
     
     return redirect(url_for("recipe_details", recipe_id=recipe_id))
+    
+# Route to confirm recipe deletion
+@app.route("/confirm-delete-recipe/<recipe_id>")
+def confirm_delete_recipe(recipe_id):
+    
+    recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
+        "_id":ObjectId(recipe_id)
+    })
+    
+    return render_template("confirm-delete-recipe.html", recipe_name=recipe_detail["name"], recipe_id=recipe_detail["_id"])
+
+# Route to delete the recipe
+@app.route("/delete-recipe/<recipe_id>")
+def delete_recipe(recipe_id):
+    
+    recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
+        "_id":ObjectId(recipe_id)
+    })
+    
+    conn[RECIPE_DATABASE]["recipes"].delete_one({
+        '_id':ObjectId(recipe_id)
+    })
+    
+    flash("The recipe: {} has been deleted".format(recipe_detail["name"]))
+    
+    return redirect(url_for("recipe_list"))
 
 
 if __name__ == '__main__':
