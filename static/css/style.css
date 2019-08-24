@@ -3,14 +3,12 @@
     height:64px;
 }
 
-#search-recipe{
-    color:blue;
+
+/*To not use the default link color of the html hyperlink tag*/
+a {
+    color:inherit;
 }
 
-#footer-logo{
-    height:100px;
-    padding-right: 10px;
-}
 
 /*style for rollover social media icons*/
 

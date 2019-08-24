@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 <!--Page Title-->
-{% block title %}Submit a recipe{% endblock %}
+{% block title %}Update the recipe: {{ recipe_detail['name'].capitalize() }}{% endblock %}
 
 <!--Breadcrumb Navigation-->
 {% block header %}
@@ -10,15 +10,15 @@
     <div class="nav-wrapper">
         <div class="col s12">
             <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
-            <a href="#!" class="breadcrumb">Submit a recipe</a>
+            <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>
+            <a href="{{ url_for('recipe_details', recipe_id=recipe_detail["_id"]) }}" class="breadcrumb">{{ recipe_detail['name'].capitalize() }}</a>
+            <a href="#!" class="breadcrumb">Update the recipe</a>
         </div>
     </div>
 </nav>
 
 {% endblock %} 
 
-
-<!--Form content to submit a recipe-->
 {% block content %}
 
 <div class="row">
@@ -27,26 +27,26 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">assignment</i>
-                <input id="icon_prefix" type="text" name="recipe-name" class="validate" required>
+                <input id="icon_prefix" type="text" name="recipe-name" class="validate" value="{{ recipe_detail['name'].capitalize() }}" required>
                 <label for="icon_prefix">Recipe Name</label>
             </div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">local_dining</i>
-                <input id="icon_telephone" type="number" class="validate" name="nutrition-facts" required>
+                <input id="icon_telephone" type="number" class="validate" name="nutrition-facts" value="{{ recipe_detail['nutrition_facts'] }}"required>
                 <label for="icon_telephone">Nutrition Facts (Calories)</label>
             </div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">access_time</i>
-                <input id="icon_telephone" type="number" name="cooking-time" class="validate" required>
+                <input id="icon_telephone" type="number" name="cooking-time" class="validate" value="{{ recipe_detail['cooking_time'] }}" required>
                 <label for="icon_telephone">Cooking Time (Mins)</label>
             </div>
             <!--Radio Button for type of recipe-->
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">cake</i>
                 <select name="type">
-                  <option value="meat" selected>Meat</option>
-                  <option value="vegetable">Vegetable</option>
-                  <option value="dessert">Dessert</option>
+                  <option value="meat" {{meat_selected}}>Meat</option>
+                  <option value="vegetable" {{vegetable_selected}}>Vegetable</option>
+                  <option value="dessert" {{dessert_selected}}>Dessert</option>
                 </select>
                 <label>Type of Recipe</label>
             </div>
@@ -59,8 +59,16 @@
                 <div id="ingredients-input">
                     <h5>Ingredients</h5>
                     <hr />
+                    {% for ingredient_numbering, ingredient in show_ingredients %}
+                    
+                    <div class="input-field col s12"> Ingredient {{ ingredient_numbering }} <input placeholder="Ingredient" value="{{ ingredient.capitalize() }}" name="ingredientInput" type="text" class="validate" required></div>
+        
+                    {% endfor %}
                 </div>
                 <div class="row center-align">
+                    
+                    
+                    
                     <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="add-ingredient"><i class="material-icons">add</i></a> Add an ingredient</div>
                     <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-ingredient"><i class="material-icons">clear</i></a> Remove an ingredient</div>
                 </div>

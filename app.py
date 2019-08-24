@@ -47,12 +47,12 @@ def recipe_details(recipe_id):
     
     return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=recipe_detail["ingredients"], show_prep_steps=recipe_detail["prep_steps"])
 
-# Route to form to submit a recipe
+# Route to form to submit a new recipe
 @app.route("/submit-recipe")
 def submit_recipe():
     return render_template("submit-recipe.html")
     
-# Route to process the form
+# Route to process the form to submit a new recipe
 @app.route("/submit-recipe", methods=["POST"])
 def process_submit_recipe():
     
@@ -79,6 +79,38 @@ def process_submit_recipe():
     
     return redirect(url_for("recipe_list"))
 
+# Route to process the form to update a recipe
+@app.route("/update-recipe/<recipe_id>")
+def update_recipe(recipe_id):
+    
+    recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
+        "_id":ObjectId(recipe_id)
+    })
+    
+    # Declaring variables for recipe types 
+    meat_selected=""
+    vegetable_selected="" 
+    dessert_selected=""
+    
+    # if else statement to pass the selected type into the update form
+    if recipe_detail["type"] == "meat":
+        meat_selected = "selected"
+    elif recipe_detail["type"] == "vegetable":
+        vegetable_selected = "selected"
+    else: 
+        dessert_selected = "selected"
+    
+    print(recipe_detail["ingredients"])
+    
+    i=0
+    ingredient_numbering=[]
+    while i<len(recipe_detail["ingredients"]):
+        i+=1
+        ingredient_numbering.append(i)
+        print (ingredient_numbering)
+        
+    
+    return render_template("update-recipe.html", recipe_detail=recipe_detail, meat_selected=meat_selected, vegetable_selected=vegetable_selected, dessert_selected=dessert_selected, show_ingredients=zip( ingredient_numbering, recipe_detail["ingredients"] ) )
 
 
 if __name__ == '__main__':
