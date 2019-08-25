@@ -6,8 +6,18 @@
 <!--Breadcrumb Navigation-->
 {% block header %}
 
-<nav>
-    <div class="nav-wrapper">
+<!--Breadcrumb for viewports for mobile devices-->
+<nav class="hide-on-med-and-up">
+    <div class="nav-wrapper black">
+        <div class="col s12">
+            <a href="{{ url_for('index') }}" class="breadcrumb">Back</a>
+        </div>
+    </div>
+</nav>
+
+<!--Breadcrumb for viewports of tablets and above-->
+<nav class="hide-on-med-and-down show-on-medium-and-up">
+    <div class="nav-wrapper black">
         <div class="col s12">
             <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
             <a href="#!" class="breadcrumb">Submit a recipe</a>
@@ -61,8 +71,8 @@
                     <hr />
                 </div>
                 <div class="row center-align">
-                    <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="add-ingredient"><i class="material-icons">add</i></a> Add an ingredient</div>
-                    <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-ingredient"><i class="material-icons">clear</i></a> Remove an ingredient</div>
+                    <div class="col s12 l6 button-height"><a class="btn-floating btn-small waves-effect waves-light red" id="add-ingredient"><i class="material-icons">add</i></a> Add an ingredient</div>
+                    <div class="col s12 l6 button-height"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-ingredient"><i class="material-icons">clear</i></a> Remove an ingredient</div>
                 </div>
             </div>
 
@@ -72,8 +82,8 @@
                     <hr />
                 </div>
                 <div class="row center-align">
-                    <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="add-prep"><i class="material-icons">add</i></a> Add a step</div>
-                    <div class="col s12 l6"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-prep"><i class="material-icons">clear</i></a> Remove a step</div>
+                    <div class="col s12 l6 button-height"><a class="btn-floating btn-small waves-effect waves-light red" id="add-prep"><i class="material-icons">add</i></a> Add a step</div>
+                    <div class="col s12 l6 button-height"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-prep"><i class="material-icons">clear</i></a> Remove a step</div>
                 </div>
             </div>
 
@@ -81,8 +91,8 @@
 
 
         <!--Submit Button-->
-        <div class="col l6 center-align">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <div class="col s12 center-align">
+        <button class="btn waves-effect waves-light button-height" type="submit" name="action">Submit
     <i class="material-icons right">send</i>
   </button>
   </div>

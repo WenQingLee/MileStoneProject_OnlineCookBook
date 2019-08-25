@@ -14,58 +14,32 @@ html {
     margin-top: 20px;
 }
 
-
-/*To not use the default link color of the html hyperlink tag*/
-a {
-    color:inherit;
+.nav-wrapper{
+    overflow:hidden;
 }
 
-
-/*style for rollover social media icons*/
-
-#social-media {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+/*Padding for breadcrumbs below the navbar*/
+.breadcrumb{
+    margin-left:10px;
 }
 
-.facebook1 {
-    height: 50px;
-    width: 50px;
-    background: #314d91 url(../images/homepage/social-icons.png) no-repeat 0px 0px;
-    -webkit-transition: All 0.3s ease-out;
-    -moz-transition: All 0.3s ease-out;
-    -o-transition: All 0.3s ease-out;
-
+/*Set the button height for the submit, update and delete buttons*/
+.button-height{
+    height:50px;
+    margin-bottom:10px;
 }
 
-.facebook1:hover {
-    background: #314d91 url(../images/homepage/social-icons.png) no-repeat 0px -73px;
+/*Create a border for the form to better demarcate its area*/
+form{
+    border: inset;
+    padding:10px;
 }
 
-.twitter1 {
-    height: 50px;
-    width: 50px;
-    background: #07beed url(../images/homepage/social-icons.png) no-repeat 0px -127px;
-    -webkit-transition: All 0.3s ease-out;
-    -moz-transition: All 0.3s ease-out;
-    -o-transition: All 0.3s ease-out;
-
+/*Setting the margins for the flash images when updating, deleting and submitting recipes*/
+.flashes{
+    margin:10px;
 }
 
-.twitter1:hover {
-    background: #07beed url(../images/homepage/social-icons.png) no-repeat 0px -204px;
-}
-
-.linkdin1 {
-    height: 50px;
-    width: 50px;
-    background: #1698E3 url(../images/homepage/social-icons.png) no-repeat 0px -635px;
-    -webkit-transition: All 0.3s ease-out;
-    -moz-transition: All 0.3s ease-out;
-    -o-transition: All 0.3s ease-out;
-}
-
-.linkdin1:hover {
-    background: #1698e3 url(../images/homepage/social-icons.png) no-repeat 0px -711px;
+li{
+    padding:10px;
 }

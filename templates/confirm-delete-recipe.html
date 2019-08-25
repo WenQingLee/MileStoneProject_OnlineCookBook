@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
 <!--Page Title-->
-{% block title %}Update the recipe: {{ recipe_name.capitalize() }}{% endblock %}
+{% block title %}Delete the recipe: {{ recipe_name.capitalize() }}{% endblock %}
 
 <!--Breadcrumb Navigation-->
 {% block header %}
 
-<nav>
-    <div class="nav-wrapper">
+<!--Breadcrumb for viewports for mobile devices-->
+<nav class="hide-on-med-and-up">
+    <div class="nav-wrapper black">
+        <div class="col s12">
+            <a href="{{ url_for('recipe_details', recipe_id=recipe_id) }}" class="breadcrumb">Back</a>
+        </div>
+    </div>
+</nav>
+
+<!--Breadcrumb for viewports of tablets and above-->
+<nav class="hide-on-med-and-down show-on-medium-and-up">
+    <div class="nav-wrapper black">
         <div class="col s12">
             <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
             <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>

@@ -80,3 +80,5 @@ I received inspiration for this project from X
 
     #### Source of knifes: https://www.macknife.com/ 
     #### Layout of Online Recipes: https://www.allrecipes.com/, https://www.delish.com/, https://www.blueapron.com/pages/sample-recipes
+    
+    #### color chosen is orange as it is appetising: https://jenndavid.com/colors-that-influence-food-sales/

@@ -8,7 +8,7 @@
 {% block content %}
 
 <!--Submit Recipe Display-->
-<div class="col s12 m7" id="submit-recipe">
+<div class="col s12 m7">
     <div class="card horizontal card-panel hoverable">
         <div class="card-image hide-on-med-and-down">
             <img src="{{ url_for('static', filename = 'images/homepage/submit-recipe.jpg') }}" alt="Cookit-Mons, the online cookbook">
@@ -74,7 +74,7 @@
             <span class="card-title activator grey-text text-darken-4">Meat Recipes<i class="material-icons right">more_vert</i></span>
         </div>
         <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Meat Recipes<i class="material-icons right">close</i></span>
+            <span class="card-title grey-text text-darken-4">Meat Recipes<hr /><i class="material-icons right">close</i></span>
 
             <ol>
                 {% for meat in type_meat %}
@@ -96,7 +96,7 @@
             <span class="card-title activator grey-text text-darken-4">Vegetable Recipes<i class="material-icons right">more_vert</i></span>
         </div>
         <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Vegetable Recipes<i class="material-icons right">close</i></span>
+            <span class="card-title grey-text text-darken-4">Vegetable Recipes<hr /><i class="material-icons right">close</i></span>
 
             <ol>
 
@@ -120,7 +120,7 @@
             <span class="card-title activator grey-text text-darken-4">Dessert Recipes<i class="material-icons right">more_vert</i></span>
         </div>
         <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Dessert Recipes<i class="material-icons right">close</i></span>
+            <span class="card-title grey-text text-darken-4">Dessert Recipes<hr /><i class="material-icons right">close</i></span>
 
             <ol>
 

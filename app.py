@@ -75,7 +75,7 @@ def process_submit_recipe():
         })
         
     # Setting the flash message    
-    flash("You have created the new recipe: " + name_input)
+    flash("You have submitted the new recipe: " + name_input)
     
     return redirect(url_for("recipe_list"))
 
@@ -143,7 +143,7 @@ def process_update_recipe(recipe_id):
     })
     
     # Set the flash message
-    flash("You have updated recipe: " + name_input)
+    flash("You have updated the recipe: " + name_input)
     
     return redirect(url_for("recipe_details", recipe_id=recipe_id))
     
