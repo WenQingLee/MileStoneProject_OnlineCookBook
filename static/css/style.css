@@ -1,9 +1,9 @@
-/*Specify Roboto Font*/
+/*Specify Roboto Font to be used*/
 html {
     font-family: 'Roboto', sans-serif;
 }
 
-/*Resize and reposition the logo to fit the navigation bar*/
+/*Resize the logo to fit the navigation bar*/
 .brand-logo {
     height:64px;
 }
@@ -14,6 +14,7 @@ html {
     margin-top: 20px;
 }
 
+/*To not let the contents within the wrapper to spill*/
 .nav-wrapper{
     overflow:hidden;
 }
@@ -40,6 +41,7 @@ form{
     margin:10px;
 }
 
+/*Padding for list items for better viewability*/
 li{
     padding:10px;
 }

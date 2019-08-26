@@ -1,3 +1,4 @@
+<!--Extending the base.html template-->
 {% extends "base.html" %}
 
 <!--Page Title-->
@@ -26,76 +27,82 @@
     </div>
 </nav>
 
-{% with messages = get_flashed_messages() %} {% if messages %}
-<ul class="flashes yellow accent-1">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %} {% endwith %} {% endblock %} {% block content %}
+<!--Flash messages for update-->
+<section>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes yellow accent-1">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+</section>
 
-<!--Recipe image-->
-<div class="recipe-image center-align">
-    <h1>{{ recipe_detail['name'].capitalize() }}</h1>
-</div>
-<hr />
+{% endblock %}
 
-<!--Recipe dashboard-->
-<div class="row">
 
-    <div class="col s12 m4 center-align">
-        <p><i class="material-icons center-align">local_dining</i> <br /> Nutrition (est) : <br /> {{ recipe_detail['nutrition_facts'] }} calories</p>
+<!--Page content-->
+{% block content %}
+
+<!--Recipe details dashboard-->
+<section>
+    <!--Recipe Name-->
+    <div class="recipe-image center-align">
+        <h1>{{ recipe_detail['name'].capitalize() }}</h1>
     </div>
-    <div class="col s12 m4 center-align">
-        <p><i class="material-icons center-align">access_time</i> <br /> Cooking Time : <br /> {{ recipe_detail['cooking_time'] }} mins</p>
+    <hr />
+    <!--Recipe nutrition, cooking time and type of recipe-->
+    <div class="row">
+        <div class="col s12 m4 center-align">
+            <p><i class="material-icons center-align">local_dining</i> <br /> Nutrition (est) : <br /> {{ recipe_detail['nutrition_facts'] }} calories</p>
+        </div>
+        <div class="col s12 m4 center-align">
+            <p><i class="material-icons center-align">access_time</i> <br /> Cooking Time : <br /> {{ recipe_detail['cooking_time'] }} mins</p>
+        </div>
+        <div class="col s12 m4 center-align">
+            <p><i class="material-icons center-align">cake</i> <br /> Type of recipe : <br /> {{ recipe_detail['type'].capitalize() }} </p>
+        </div>
     </div>
-    <div class="col s12 m4 center-align">
-        <p><i class="material-icons center-align">cake</i> <br /> Type of recipe : <br /> {{ recipe_detail['type'].capitalize() }} </p>
+    <hr />
+    <div class="row center-align">
+        <!--Display for list of ingredients, center aligned-->
+        <div class="col s12 l6">
+            <h5>Ingredients</h5>
+            <ol>
+                {% for ingredient in show_ingredients %}
+                <li>{{ ingredient.capitalize() }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <!--Display for preparation steps, left aligned-->
+        <div class="col s12 l6">
+            <h5>Preparation Steps</h5>
+            <ol class="left-align">
+                {% for prep_steps in show_prep_steps %}
+                <li>{{ prep_steps.capitalize() }}</li>
+                {% endfor %}
+            </ol>
+        </div>
     </div>
-</div>
-<hr />
+</section>
 
-<div class="row center-align">
-
-    <div class="col s12 l6">
-        <h5>Ingredients</h5>
-
-        <ol>
-            {% for ingredient in show_ingredients %}
-
-            <li>{{ ingredient.capitalize() }}</li>
-
-            {% endfor %}
-        </ol>
+<!--Submit and delete buttons-->
+<section>
+    <!--Div wrapper for update and delete buttons-->
+    <div class="row">
+        <!--Update button-->
+        <div class="col s12 l6 center-align button-height">
+            <a href="{{ url_for( 'update_recipe', recipe_id=recipe_detail['_id'] ) }}" class="waves-effect waves-light btn">
+                <i class="material-icons right">edit</i>Update Recipe
+            </a>
+        </div>
+        <!--Delete button-->
+        <div class="col s12 l6 center-align button-height">
+            <a href="{{ url_for( 'confirm_delete_recipe', recipe_id=recipe_detail['_id'] ) }}" class="waves-effect waves-light btn">
+                <i class="material-icons right">delete</i>Delete Recipe
+            </a>
+        </div>
     </div>
-
-    <div class="col s12 l6">
-        <h5>Preparation Steps</h5>
-
-        <ol class="left-align">
-            {% for prep_steps in show_prep_steps %}
-
-            <li>{{ prep_steps.capitalize() }}</li>
-
-            {% endfor %}
-        </ol>
-    </div>
-
-</div>
-
-<!--Div wrapper for update and delete buttons-->
-<div class="row">
-
-    <!--Update button-->
-    <div class="col s12 l6 center-align button-height">
-        <a href="{{ url_for( 'update_recipe', recipe_id=recipe_detail['_id'] ) }}" class="waves-effect waves-light btn"><i class="material-icons right">edit</i>Update Recipe</a>
-    </div>
-    
-    <!--Delete button-->
-    <div class="col s12 l6 center-align button-height">
-        <a href="{{ url_for( 'confirm_delete_recipe', recipe_id=recipe_detail['_id'] ) }}" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>Delete Recipe</a>
-    </div>
-
-</div>
+</section>
 
 {% endblock %}

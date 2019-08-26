@@ -1,3 +1,4 @@
+<!--Extending the base.html template-->
 {% extends "base.html" %}
 
 <!--Page Title-->
@@ -31,14 +32,15 @@
 
 
 {% block content %}
-
-<form action='{{url_for("delete_recipe", recipe_id=recipe_id) }}'>
-               Are you sure you want to delete the recipe: {{ recipe_name }} ?
-               <div>
-                   <input type='submit' class='btn btn-primary' value='Yes'>
-                   <a href='{{ url_for('recipe_details', recipe_id=recipe_id) }}' class='btn btn-primary'>No</a>
-               </div>
-           </form>
-
+<!--Confirmation to delete recipe with yes or no buttons-->
+<section>
+    <form action='{{url_for("delete_recipe", recipe_id=recipe_id) }}'>
+           Are you sure you want to delete the recipe: {{ recipe_name }} ?
+           <div>
+               <input type='submit' class='btn btn-primary' value='Yes'>
+               <a href='{{ url_for('recipe_details', recipe_id=recipe_id) }}' class='btn btn-primary'>No</a>
+           </div>
+       </form>
+</section>
 
 {% endblock %}

@@ -15,25 +15,17 @@ RECIPE_DATABASE = 'online_cookbook'
 @app.route("/")
 def index():
     
-    recipes = conn[RECIPE_DATABASE]["recipes"].find({})
-    
-    type_meat = conn[RECIPE_DATABASE]["recipes"].find({"type":"meat"})
-    
-    type_vegetable = conn[RECIPE_DATABASE]["recipes"].find({"type":"vegetable"})
-    
-    type_dessert = conn[RECIPE_DATABASE]["recipes"].find({"type":"dessert"})
-    
-    return render_template("index.html", recipes=recipes, type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
+    return render_template("index.html")
 
 # Route to recipes list
 @app.route("/recipe-list")
 def recipe_list():
-    
-    type_meat = conn[RECIPE_DATABASE]["recipes"].find({"type":"meat"})
-    
-    type_vegetable = conn[RECIPE_DATABASE]["recipes"].find({"type":"vegetable"})
-    
-    type_dessert = conn[RECIPE_DATABASE]["recipes"].find({"type":"dessert"})
+    # Search the database for recipes with type meat and assign it to the variable type_meat and sort them by name in ascending order
+    type_meat = conn[RECIPE_DATABASE]["recipes"].find({"type":"meat"}).sort("name")
+    # Search the database for recipes with type vegetable and assign it to the variable type_vegetable and sort them by name in ascending order
+    type_vegetable = conn[RECIPE_DATABASE]["recipes"].find({"type":"vegetable"}).sort("name")
+    # Search the database for recipes with type dessert and assign it to the variable type_dessert and sort them by name in ascending order
+    type_dessert = conn[RECIPE_DATABASE]["recipes"].find({"type":"dessert"}).sort("name")
     
     return render_template("recipes-list.html", type_meat=type_meat, type_vegetable=type_vegetable, type_dessert=type_dessert)
 
@@ -41,6 +33,7 @@ def recipe_list():
 @app.route("/recipe-details/<recipe_id>")
 def recipe_details(recipe_id):
     
+    # Search the database for the recipe with the same id
     recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
         "_id":ObjectId(recipe_id)
     })
@@ -74,7 +67,7 @@ def process_submit_recipe():
             "prep_steps":prep_input
         })
         
-    # Setting the flash message    
+    # Setting the flash message for submit recipe  
     flash("You have submitted the new recipe: " + name_input)
     
     return redirect(url_for("recipe_list"))
@@ -83,6 +76,7 @@ def process_submit_recipe():
 @app.route("/update-recipe/<recipe_id>")
 def update_recipe(recipe_id):
     
+    # Search the database for the recipe with the same id
     recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
         "_id":ObjectId(recipe_id)
     })
@@ -142,7 +136,7 @@ def process_update_recipe(recipe_id):
         }
     })
     
-    # Set the flash message
+    # Set the flash message for updates
     flash("You have updated the recipe: " + name_input)
     
     return redirect(url_for("recipe_details", recipe_id=recipe_id))
@@ -151,6 +145,7 @@ def process_update_recipe(recipe_id):
 @app.route("/confirm-delete-recipe/<recipe_id>")
 def confirm_delete_recipe(recipe_id):
     
+    # Search the database for the recipe with the same id
     recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
         "_id":ObjectId(recipe_id)
     })
@@ -161,14 +156,17 @@ def confirm_delete_recipe(recipe_id):
 @app.route("/delete-recipe/<recipe_id>")
 def delete_recipe(recipe_id):
     
+    # Search the database for the recipe with the same id
     recipe_detail = conn[RECIPE_DATABASE]["recipes"].find_one({
         "_id":ObjectId(recipe_id)
     })
     
+    # Delete the recipe from the database based on the id
     conn[RECIPE_DATABASE]["recipes"].delete_one({
         '_id':ObjectId(recipe_id)
     })
     
+    # Flash message for deletion
     flash("The recipe: {} has been deleted".format(recipe_detail["name"]))
     
     return redirect(url_for("recipe_list"))
