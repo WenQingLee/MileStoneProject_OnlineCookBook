@@ -153,7 +153,11 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * web gunicorn app:app 
 8. Create the requirements file using bash
     * pip3 freeze --local > requirements.txt
-9. 
+9. Commit and push the project to heroku
+    * git add .
+    * git commit -m "<commit message>"
+    * git push heroku master
+10. 
 
 
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
