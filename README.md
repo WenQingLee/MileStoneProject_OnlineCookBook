@@ -132,10 +132,10 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
 
 ### Deployment
 
-        The website has been deployed.
+The website has been deployed at https://wq-cookit.herokuapp.com/
 
 
-#### Heroku Deployment
+#### Heroku Deployment (Debug value changed to false for deployment)
 
 1. Sign up for a Heroku Account (https://www.heroku.com/)
 2. Install Heroku using bash:
@@ -157,17 +157,28 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * git add .
     * git commit -m "<commit message>"
     * git push heroku master
-10. 
+10. Install --classic heroku
+    *sudo snap install --classic heroku
+11. Set the environment variables by using heroku config:set <WHATEVER=VALUE>
+    * Set MONGO_URI config by typing this in the CLI: 
+        heroku config:set MONGO_URI=(input here)
+12. To check the current existing config variables
+    * heroku config
+
+#### To re-generate requirements.txt after installing more packages
+1. pip3 freeze --local > requirements.txt
+2. git add .
+3. git commit -m ​"Updated requirements.txt" 
+4. git push heroku master 
 
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
-
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-
-Different values for environment variables (Heroku Config Vars)?
-Different configuration files?
-Separate git branch?
-In addition, if it is not obvious, you should also describe how to run your code locally.
+#### Running the application locally
+1. Create a new workspace in C9 with a workspace name and description
+2. Clone the github repository at https://github.com/WenQingLee/MilestoneProject_OnlineCookbook
+3. Install requirements
+    * pip3 install -r requirements.txt
+4. In app.py set debug to True.
+4. To run the application locally, type python3 app.py
 
 ### Credits
 #### Content
