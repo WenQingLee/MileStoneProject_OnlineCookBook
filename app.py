@@ -171,10 +171,11 @@ def delete_recipe(recipe_id):
     
     return redirect(url_for("recipe_list"))
 
+app.secret_key = os.environ.get('secret_app_key')
+app.config['SESSION_TYPE'] = os.environ.get('session_key')
 
 if __name__ == '__main__':
-    app.config["SECRET_KEY"] = os.environ.get('secret_app_key')
-    app.config['SESSION_TYPE'] = os.environ.get('session_key')
+
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=False)
