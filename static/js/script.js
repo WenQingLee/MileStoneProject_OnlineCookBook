@@ -16,7 +16,7 @@ $(document).ready(function() {
 // To add an input field for ingredients when the add button is clicked
 $("#add-ingredient").on("click", function() {
   let i = $("#ingredients-input div").length + 1;
-  $("#ingredients-input").append('<div class="input-field col s12"> Ingredient ' + i + '<input placeholder="Ingredient" name="ingredientInput" id="ingredientCount" type="text" class="validate" required></div>');
+  $("#ingredients-input").append('<div class="input-field col s12"> Ingredient ' + i + '<input placeholder="Ingredient" name="ingredientInput" type="text" class="validate" required></div>');
 });
 
 // To remove an input field for ingredients when the remove button is clicked

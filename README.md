@@ -2,8 +2,17 @@
 
 Data Centric Development Milestone Project  
 
+## Index
 
-## Project Purpose
+1. [Project Purpose](#project-purpose)
+2. [UX](#ux)
+3. [Features](#features)
+4. [Technologies Used](#technologies-used)
+5. [Testing](#testing)
+6. [Deployment](#deployment)
+7. [Credits](#credits)
+
+## <a name="project-purpose">Project Purpose</a>
 
 
 The premise of Cookit-Mons is:
@@ -11,7 +20,7 @@ The premise of Cookit-Mons is:
 2. Raise awareness of MAC knives
 
 
-## UX
+## <a name="ux">UX</a>
 
 The goal in the design is to present data in a systematic approach that encourages first time learning
 
@@ -30,7 +39,7 @@ To reduce cognitive oveerload, the user will also not be required to go beyond 3
 
 The ER diagram, scope and wireframe can be found under the scope and skeleton folder.
 
-## Features
+## <a name="features">Features</a> 
 
 ### Existing Features
 
@@ -76,7 +85,7 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
 3. To promote the MAC knife tools that are specific to each recipe type by using referenced documents (e.g. cleavers for meat recipes and paring knives for vegetable recipes)
 
 
-### Technologies Used
+## <a name="technologies-used">Technologies Used</a>
 1. HTML (https://www.w3schools.com/html/html_intro.asp)
 2. CSS (https://www.w3schools.com/css/)
 3. Materialize (https://materializecss.com/): The frontend was built using Materialize framework
@@ -87,12 +96,12 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
 8. Flask with Jinja2 (https://github.com/pallets/flask)
 9. MongoDB (https://www.mongodb.com/): MongoDB was used as a database
 
-### Testing
+## <a name="testing">Testing</a>
 
-#### Manual Testing
+### Manual Testing
 
 1. Home/Index Page
-    * Navigation bar is mobile responsive and links to the correct sites
+    * Navigation bar is mobile responsive and links to the correct pages.
     * Carousel is working that introduces the user to the MAC knives. Clicking on the link will open a new window to the knife's details
 2. Submit a recipe page
     * Navigation bar is mobile responsive and links to the correct pages
@@ -130,12 +139,12 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * If the user clicks yes, they will be redirected back to the recipe lists page with a flashed message that informs them that the recipe has been deleted.
     * The recipe is deleted and recipe list has been updated
 
-### Deployment
+## <a name="deployment">Deployment</a>
 
 The website has been deployed at https://wq-cookit.herokuapp.com/
 
 
-#### Heroku Deployment (Debug value changed to false for deployment)
+### Heroku Deployment (Debug value changed to false for deployment)
 
 1. Sign up for a Heroku Account (https://www.heroku.com/)
 2. Install Heroku using bash:
@@ -165,33 +174,34 @@ The website has been deployed at https://wq-cookit.herokuapp.com/
 12. To check the current existing config variables
     * heroku config
 
-#### To re-generate requirements.txt after installing more packages
+### To re-generate requirements.txt after installing more packages
 1. pip3 freeze --local > requirements.txt
 2. git add .
 3. git commit -m ​"Updated requirements.txt" 
 4. git push heroku master 
 
 
-#### Running the application locally
+### Running the application locally
 1. Create a new workspace in C9 with a workspace name and description
 2. Clone the github repository at https://github.com/WenQingLee/MilestoneProject_OnlineCookbook
 3. Install requirements
     * pip3 install -r requirements.txt
-4. In app.py set debug to True.
-4. To run the application locally, type python3 app.py
+4. The secret key and session key has to be created in the environment 
+5. In app.py set debug to True.
+6. To run the application locally, type python3 app.py
 
-### Credits
-#### Content
+## <a name="credits">Credits</a>
+### Content
 The recipes were copied from the following sites: https://www.allrecipes.com/, https://www.delish.com/, https://www.blueapron.com/pages/sample-recipes
 
 The logo was obtained from freelogodesign: https://www.freelogodesign.org/
 
 The source of knives were taken from the MAC knives webpage: https://www.macknife.com/ 
 
-#### Media
+### Media
 The photos used in this site were obtained from Pexels and the following sites: https://www.allrecipes.com/, https://www.delish.com/, https://www.blueapron.com/pages/sample-recipes
 
-#### Acknowledgements
+### Acknowledgements
 I received inspiration for this project from the following sites:
 * Website Layout: https://www.blueapron.com/pages/sample-recipes
 * Colors: https://jenndavid.com/colors-that-influence-food-sales/
