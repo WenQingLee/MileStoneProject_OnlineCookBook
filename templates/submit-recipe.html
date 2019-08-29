@@ -35,7 +35,7 @@
 <!--Form to submit a recipe-->
 <section>
     <div class="row">
-        <form class="col s12" method="POST">
+        <form class="col s12" enctype="multipart/form-data" method="POST">
             <!--Text inputs for recipe name, nutrition facts and cooking time-->
             <div class="row">
                 <div class="input-field col s12">
@@ -91,6 +91,19 @@
                     </div>
                 </div>
             </div>
+
+             <!--Upload Image Button-->
+            <div class="file-field input-field col l6">
+                <div class="btn">
+                    <span>Upload image</span>
+                    <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+
             <!--Submit Button-->
             <div class="col s12 center-align">
                 <button class="btn waves-effect waves-light button-height" type="submit" name="action">

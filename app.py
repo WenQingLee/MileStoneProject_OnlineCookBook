@@ -2,8 +2,14 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 import os
 import pymongo
 from bson.objectid import ObjectId
+from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 app = Flask(__name__)
+TOP_LEVEL_DIR = os.path.abspath(os.curdir) 
+upload_dir = '/static/uploads/img/' 
+app.config["UPLOADS_DEFAULT_DEST"] = TOP_LEVEL_DIR + upload_dir 
+app.config["UPLOADED_IMAGES_DEST"] = TOP_LEVEL_DIR + upload_dir 
+app.config["UPLOADED_IMAGES_URL"] = upload_dir 
 
 # Create the connection to MongoDB
 conn = pymongo.MongoClient(os.getenv("MONGO_URI"))
