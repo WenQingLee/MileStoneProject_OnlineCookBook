@@ -45,3 +45,8 @@ form{
 li{
     padding:10px;
 }
+
+.recipe-image{
+    text-align:center;
+    height:200px;
+}

@@ -5,11 +5,17 @@ from bson.objectid import ObjectId
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 app = Flask(__name__)
+
+# Image and file upload configuration
 TOP_LEVEL_DIR = os.path.abspath(os.curdir) 
 upload_dir = '/static/uploads/img/' 
 app.config["UPLOADS_DEFAULT_DEST"] = TOP_LEVEL_DIR + upload_dir 
 app.config["UPLOADED_IMAGES_DEST"] = TOP_LEVEL_DIR + upload_dir 
 app.config["UPLOADED_IMAGES_URL"] = upload_dir 
+
+# UploadSet for images
+images_upload_set=UploadSet('images', IMAGES)
+configure_uploads(app, images_upload_set)
 
 # Create the connection to MongoDB
 conn = pymongo.MongoClient(os.getenv("MONGO_URI"))
@@ -44,7 +50,7 @@ def recipe_details(recipe_id):
         "_id":ObjectId(recipe_id)
     })
     
-    return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=recipe_detail["ingredients"], show_prep_steps=recipe_detail["prep_steps"])
+    return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=recipe_detail["ingredients"], show_prep_steps=recipe_detail["prep_steps"], image=recipe_detail["image_url"])
 
 # Route to form to submit a new recipe
 @app.route("/submit-recipe")
@@ -62,6 +68,12 @@ def process_submit_recipe():
     type_input = request.form.get("type")
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
+    image = request.files.get('image')
+    print("------IMAGE-----")
+    print(image)
+    
+    # Use the images upload set to save the image
+    filename = images_upload_set.save(image)
     
     # Insert the recipe into a new document
     conn[RECIPE_DATABASE]["recipes"].insert({
@@ -70,7 +82,8 @@ def process_submit_recipe():
             "cooking_time":cooking_time_input,
             "type":type_input,
             "ingredients":ingredients_input,
-            "prep_steps":prep_input
+            "prep_steps":prep_input,
+            "image_url":images_upload_set.url(filename)
         })
         
     # Setting the flash message for submit recipe  
@@ -127,6 +140,12 @@ def process_update_recipe(recipe_id):
     type_input = request.form.get("type")
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
+    image = request.files.get('image')
+    print("------IMAGE-----")
+    print(image)
+    
+    # Use the images upload set to save the image
+    filename = images_upload_set.save(image)
     
     # Using Mongo to update
     conn[RECIPE_DATABASE]["recipes"].update({
@@ -138,7 +157,8 @@ def process_update_recipe(recipe_id):
             "cooking_time":cooking_time_input,
             "type":type_input,
             "ingredients":ingredients_input,
-            "prep_steps":prep_input
+            "prep_steps":prep_input,
+            "image_url":images_upload_set.url(filename)
         }
     })
     
