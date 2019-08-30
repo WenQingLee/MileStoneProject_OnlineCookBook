@@ -22,7 +22,7 @@
         <div class="col s12">
             <a href="{{ url_for('index') }}" class="breadcrumb">Home</a>
             <a href="{{ url_for('recipe_list') }}" class="breadcrumb">List of Recipes</a>
-            <a href="{{ url_for('recipe_details', recipe_id=recipe_detail[" _id "]) }}" class="breadcrumb">{{ recipe_detail['name'].capitalize() }}</a>
+            <a href="{{ url_for('recipe_details', recipe_id=recipe_detail["_id"]) }}" class="breadcrumb">{{ recipe_detail['name'].capitalize() }}</a>
             <a href="#!" class="breadcrumb">Update recipe</a>
         </div>
     </div>
@@ -38,6 +38,38 @@
 <section>
     <div class="row">
         <form class="col s12" enctype="multipart/form-data" method="POST">
+            {% if recipe_detail["image_url"] is defined %}
+            <!--Image for recipe-->
+            <div class="container">
+                <div class="row center-align">
+                    <div>
+                        <img class="img-height" src="{{ recipe_detail["image_url"] }}">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!--Upload Image Button-->
+            <div class="row">
+                <div class="col l3">
+                    &nbsp;
+                </div>
+                
+                <div class="file-field input-field s12 col l6" id="image-upload-btn">
+                    <div class="btn">
+                        <span>Update image</span>
+                        <input id="image-upload" type="file" name="image" accept="image/*" required>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                
+                <div class="col l3">
+                    &nbsp;
+                </div>
+            </div>
+
             <!--Text inputs for recipe name, nutrition facts and cooking time with the values added as per recorded-->
             <div class="row">
                 <div class="input-field col s12">
@@ -99,17 +131,6 @@
                         <div class="col s12 l6 button-height"><a class="btn-floating btn-small waves-effect waves-light red" id="add-prep"><i class="material-icons">add</i></a> Add a step</div>
                         <div class="col s12 l6 button-height"><a class="btn-floating btn-small waves-effect waves-light red" id="remove-prep"><i class="material-icons">clear</i></a> Remove a step</div>
                     </div>
-                </div>
-            </div>
-
-            <!--Upload Image Button-->
-            <div class="file-field input-field col l6">
-                <div class="btn">
-                    <span>Upload image</span>
-                    <input type="file" name="image">
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text">
                 </div>
             </div>
 

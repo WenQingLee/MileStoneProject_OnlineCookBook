@@ -53,6 +53,7 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * Add and remove buttons for ingredients and preparation steps for the user to use accordingly
     * Input fields are to be filled up before the recipe may be submitted. For the inputs of ingredients and preparation steps, it is dependent on the number of input fields the user added.
     * Submit button for the user to add new recipes
+    * User is able to upload an image to the corresponding recipe
     * Once the recipe is submitted, the user will be redirected to the recipe list page with a flashed message that the recipe has been added.
 3. Recipe-list Page
     * Mobile responsive Navigation bar that allows easy navigation to either (1) Submit a recipe or (2) Search the existing recipes
@@ -65,12 +66,14 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * Mobile responsive Navigation bar that allows easy navigation to either (1) Submit a recipe or (2) Search the existing recipes
     * Mobile responsive Breadcrumb navigation trail
     * Dashboard with the recipe details such as Name, Nutrition, Cooking Time, Type of recipe, Ingredients and Preparation Steps
+    * The recipe image upload will be shown as part of the dashboard
     * Buttons to either update or delete the recipe
 5. Update-recipe Page
     * Mobile responsive Navigation bar that allows easy navigation to either (1) Submit a recipe or (2) Search the existing recipes
     * Mobile responsive Breadcrumb navigation trail
     * Input fields for the recipes (With the previous recipes inputs for easy reference)
     * Input fields are to be filled up before the recipe may be updated. For the inputs of ingredients and preparation steps, it is dependent on the number of input fields the user added.
+    * The image of the recipe has to be uploaded before the page can be updated
     * Update button for the user to add new recipes
     * Once the recipe is updated, the user will be redirected to the recipe details page with a flashed message that the recipe has been updated.
 6. Confirm-delete-recipe Page
@@ -80,7 +83,7 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * If the user clicks yes, they will be redirected back to the recipe lists page with a flashed message that informs them that the recipe has been deleted.
 
 ### Features left to implement
-1. To allow the user to upload files
+1. To allow the user to choose not to upload an image or delete uploaded images
 2. User authentication (Register/Login/Logout)
 3. To promote the MAC knife tools that are specific to each recipe type by using referenced documents (e.g. cleavers for meat recipes and paring knives for vegetable recipes)
 
@@ -110,6 +113,7 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * Dropdown list is working
     * Add and remove buttons for ingredients and preparation steps creates and removes an input field respectively.
     * Input fields are to be filled up before the recipe may be submitted. For the inputs of ingredients and preparation steps, it is dependent on the number of input fields the user added.
+    * The user is required to upload an image before submitting a recipe
     * Submit button for the user to add new recipes is working
     * Once the recipe is submitted, the user is redirected to the recipe list page with a flashed message that the recipe has been added.
 3. Recipe-list Page
@@ -130,11 +134,12 @@ The ER diagram, scope and wireframe can be found under the scope and skeleton fo
     * Input fields are filled with the previous recipes inputs
     * Add and remove buttons for ingredients and preparation steps creates and removes an input field respectively.
     * Input fields are to be filled up before the recipe may be submitted. For the inputs of ingredients and preparation steps, it is dependent on the number of input fields the user added.
+    * The user is required to upload the image before the recipe can be updated
     * Update button for the user to update recipes
     * Once the recipe is updated, the user will be redirected to the recipe details page with a flashed message that the recipe has been updated and the details reflecting it.
 6. Confirm-delete-recipe Page
     * Navigation bar is mobile responsive and links to the correct pages
-    * Breadcrumb navigation trail is mobile responsive and links to the pages
+    * Breadcrumb navigation trail is mobile responsive and links to the correct pages
     * If the user clicks no, they will be redirected back to the recipe details page
     * If the user clicks yes, they will be redirected back to the recipe lists page with a flashed message that informs them that the recipe has been deleted.
     * The recipe is deleted and recipe list has been updated

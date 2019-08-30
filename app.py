@@ -50,7 +50,7 @@ def recipe_details(recipe_id):
         "_id":ObjectId(recipe_id)
     })
     
-    return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=recipe_detail["ingredients"], show_prep_steps=recipe_detail["prep_steps"], image=recipe_detail["image_url"])
+    return render_template("recipe-detail.html", recipe_detail=recipe_detail, show_ingredients=recipe_detail["ingredients"], show_prep_steps=recipe_detail["prep_steps"])
 
 # Route to form to submit a new recipe
 @app.route("/submit-recipe")
@@ -69,8 +69,6 @@ def process_submit_recipe():
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
     image = request.files.get('image')
-    print("------IMAGE-----")
-    print(image)
     
     # Use the images upload set to save the image
     filename = images_upload_set.save(image)
@@ -141,8 +139,6 @@ def process_update_recipe(recipe_id):
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
     image = request.files.get('image')
-    print("------IMAGE-----")
-    print(image)
     
     # Use the images upload set to save the image
     filename = images_upload_set.save(image)
@@ -204,4 +200,4 @@ if __name__ == '__main__':
 
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=False)
+            debug=True)
