@@ -124,7 +124,7 @@ def update_recipe(recipe_id):
     while j<len(recipe_detail["prep_steps"]):
         j+=1
         prep_steps_numbering.append(j)
-    
+        
     return render_template("update-recipe.html", recipe_detail=recipe_detail, meat_selected=meat_selected, vegetable_selected=vegetable_selected, dessert_selected=dessert_selected, show_ingredients=zip( ingredient_numbering, recipe_detail["ingredients"] ), show_prep_steps=zip( prep_steps_numbering, recipe_detail["prep_steps"] ) )
 
 # Route to process the form to update an existing recipe
@@ -200,4 +200,4 @@ if __name__ == '__main__':
 
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)
