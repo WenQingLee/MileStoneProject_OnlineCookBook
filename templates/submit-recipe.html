@@ -26,6 +26,17 @@
     </div>
 </nav>
 
+<!--Flash messages for submit recipe-->
+<section>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes yellow accent-1">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+</section>
+
 {% endblock %}
 
 

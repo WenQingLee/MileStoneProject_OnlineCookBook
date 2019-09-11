@@ -63,31 +63,39 @@ def process_submit_recipe():
     
     # Getting the inputs from the form submitted
     name_input = request.form.get("recipe-name")
-    nutrition_facts_input = request.form.get("nutrition-facts")
-    cooking_time_input = request.form.get("cooking-time")
+    nutrition_facts_input = int(request.form.get("nutrition-facts"))
+    cooking_time_input = int(request.form.get("cooking-time"))
     type_input = request.form.get("type")
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
     image = request.files.get('image')
     
-    # Use the images upload set to save the image
-    filename = images_upload_set.save(image)
-    
-    # Insert the recipe into a new document
-    conn[RECIPE_DATABASE]["recipes"].insert({
-            "name":name_input,
-            "nutrition_facts":nutrition_facts_input,
-            "cooking_time":cooking_time_input,
-            "type":type_input,
-            "ingredients":ingredients_input,
-            "prep_steps":prep_input,
-            "image_url":images_upload_set.url(filename)
-        })
+    if nutrition_facts_input <= 0 or cooking_time_input <= 0:
         
-    # Setting the flash message for submit recipe  
-    flash("You have submitted the new recipe: " + name_input)
+        flash("Please provide an input greater than 0 for nutrition facts and cooking time")
+        
+        return redirect(url_for('submit_recipe'))
+        
+    else:
     
-    return redirect(url_for("recipe_list"))
+        # Use the images upload set to save the image
+        filename = images_upload_set.save(image)
+        
+        # Insert the recipe into a new document
+        conn[RECIPE_DATABASE]["recipes"].insert({
+                "name":name_input,
+                "nutrition_facts":nutrition_facts_input,
+                "cooking_time":cooking_time_input,
+                "type":type_input,
+                "ingredients":ingredients_input,
+                "prep_steps":prep_input,
+                "image_url":images_upload_set.url(filename)
+            })
+            
+        # Setting the flash message for submit recipe  
+        flash("You have submitted the new recipe: " + name_input)
+    
+        return redirect(url_for("recipe_list"))
 
 # Route to process the form to update a recipe
 @app.route("/update-recipe/<recipe_id>")
@@ -133,33 +141,41 @@ def process_update_recipe(recipe_id):
     
     # Get the form inputs
     name_input = request.form.get("recipe-name")
-    nutrition_facts_input = request.form.get("nutrition-facts")
-    cooking_time_input = request.form.get("cooking-time")
+    nutrition_facts_input = int(request.form.get("nutrition-facts"))
+    cooking_time_input = int(request.form.get("cooking-time"))
     type_input = request.form.get("type")
     ingredients_input=request.form.getlist("ingredientInput")
     prep_input=request.form.getlist("prepInput")
     image = request.files.get('image')
     
-    # Use the images upload set to save the image
-    filename = images_upload_set.save(image)
+    if nutrition_facts_input <= 0 or cooking_time_input <= 0:
     
-    # Using Mongo to update
-    conn[RECIPE_DATABASE]["recipes"].update({
-        "_id":ObjectId(recipe_id)
-    }, {
-        "$set": {
-            "name":name_input,
-            "nutrition_facts":nutrition_facts_input,
-            "cooking_time":cooking_time_input,
-            "type":type_input,
-            "ingredients":ingredients_input,
-            "prep_steps":prep_input,
-            "image_url":images_upload_set.url(filename)
-        }
-    })
+        flash("Please provide an input greater than 0 for nutrition facts and cooking time")
+        
+        return redirect(url_for('process_update_recipe', recipe_id=recipe_id))
+            
+    else:
     
-    # Set the flash message for updates
-    flash("You have updated the recipe: " + name_input)
+        # Use the images upload set to save the image
+        filename = images_upload_set.save(image)
+        
+        # Using Mongo to update
+        conn[RECIPE_DATABASE]["recipes"].update({
+            "_id":ObjectId(recipe_id)
+        }, {
+            "$set": {
+                "name":name_input,
+                "nutrition_facts":nutrition_facts_input,
+                "cooking_time":cooking_time_input,
+                "type":type_input,
+                "ingredients":ingredients_input,
+                "prep_steps":prep_input,
+                "image_url":images_upload_set.url(filename)
+            }
+        })
+        
+        # Set the flash message for updates
+        flash("You have updated the recipe: " + name_input)
     
     return redirect(url_for("recipe_details", recipe_id=recipe_id))
     
